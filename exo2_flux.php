@@ -1,9 +1,8 @@
 
 <?php
 /*
-Auteur : Irhirane Fatima
-Objectif : Exercices sur les structures de contrôle en PHP.
-Date : 18/10/2026
+ les structures 
+
 */
 
 require_once "config.php";
