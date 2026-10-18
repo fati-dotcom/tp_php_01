@@ -1,9 +1,8 @@
 
 <?php
 /*
-Auteur : Irhirane Fatima
-Objectif : Gérer la connexion de l'utilisateur.
-Date : 18/10/2026
+ Gérer la connexion de l'utilisateur
+
 */
 
 session_start();
@@ -14,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $login = trim($_POST["login"] ?? "");
     $mot_de_passe = $_POST["mot_de_passe"] ?? "";
 
-    if ($login === "admin" && $mot_de_passe === "1234") {
+    if ($login === "admin" && $mot_de_passe === "1415") {
         $_SESSION["login"] = $login;
         header("Location: profil.php");
         exit;
