@@ -1,37 +1,18 @@
-
 <?php
-/*
-Auteur : Irhirane Fatima
-Objectif : Vérifier et afficher les notes envoyées par POST.
-Date : 18/10/2026
-*/
+$nom       = $_POST['nom'];
+$note_info = $_POST['note_info'];
+$note_math = $_POST['note_math'];
+$moyenne   = ($note_info + $note_math) / 2;
 
-require_once "config.php";
+// Sauvegarde f data/notes.csv
+$f = fopen("data/notes.csv", "a");
+fputcsv($f, [$nom, $note_info, $note_math]);
+fclose($f);
 
-if (
-    isset($_POST["nom"], $_POST["note_info"], $_POST["note_math"])
-    && trim($_POST["nom"]) !== ""
-    && $_POST["note_info"] !== ""
-    && $_POST["note_math"] !== ""
-) {
-    $nom = trim($_POST["nom"]);
-    $note_info = filter_var($_POST["note_info"], FILTER_VALIDATE_FLOAT);
-    $note_math = filter_var($_POST["note_math"], FILTER_VALIDATE_FLOAT);
-
-    if (
-        $note_info !== false &&
-        $note_math !== false &&
-        $note_info >= NOTE_MIN && $note_info <= NOTE_MAX &&
-        $note_math >= NOTE_MIN && $note_math <= NOTE_MAX
-    ) {
-        echo "<h1>Récapitulatif</h1>";
-        echo "<p>Nom : " . htmlspecialchars($nom) . "</p>";
-        echo "<p>Note en informatique : " . $note_info . "/20</p>";
-        echo "<p>Note en mathématiques : " . $note_math . "/20</p>";
-    } else {
-        echo "Erreur : les notes doivent être comprises entre 0 et 20.";
-    }
-} else {
-    echo "Erreur : veuillez remplir tous les champs.";
-}
+echo "<h2>Résultat</h2>";
+echo "<p>Apprenant : $nom</p>";
+echo "<p>Note en informatique : $note_info</p>";
+echo "<p>Note en mathématiques : $note_math</p>";
+echo "<p>Moyenne : $moyenne</p>";
+echo "<p><a href='saisie.html'>Nouvelle saisie</a></p>";
 ?>
